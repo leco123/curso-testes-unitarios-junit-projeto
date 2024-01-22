@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.algaworks.junit.utilidade.SaudacaoUtil.saudar;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -66,8 +66,9 @@ class SaudacaoUtilTest {
         // [A]ssert: Validar se o cenário está correto;
         //assertEquals("Hora invalida", e.getMessage());
 
-        IllegalArgumentException e = catchThrowableOfType(() -> saudar(horaInvalida), IllegalArgumentException.class);
-        assertThat(e).hasMessage("Hora invalida");
+        assertThatThrownBy(() -> saudar(horaInvalida))
+                .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("Hora invalida");
 
     }
 
