@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.algaworks.junit.utilidade.SaudacaoUtil.saudar;
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,6 +72,16 @@ class SaudacaoUtilTest {
 
         // [A]ssert: Validar se o cenário está correto;
         assertDoesNotThrow(chamadaValidaDeMetodo);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints =  {5,6,7,8,9,10,11})
+    public void Dado_horario_matinal_Quando_saudar_Entao_deve_retorna_bom_dia(int hora) {
+
+        String saudacao = saudar(hora);
+
+        // [A]ssert: Validar se o cenário está correto;
+        assertEquals("Bom dia", saudacao, "Saudação incorreta!");
     }
 
 }
