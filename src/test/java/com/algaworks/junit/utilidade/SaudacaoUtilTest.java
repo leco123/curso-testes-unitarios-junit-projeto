@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.algaworks.junit.utilidade.SaudacaoUtil.saudar;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -22,7 +23,9 @@ class SaudacaoUtilTest {
         String saudacao = saudar(horaValida);
 
         // [A]ssert: Validar se o cenário está correto;
-        assertEquals("Bom dia", saudacao, "Saudação incorreta!");
+        assertThat(saudacao)
+                .withFailMessage("Saudação incorreta!")
+                .isEqualTo("Bom dia");
     }
 
     @Test
