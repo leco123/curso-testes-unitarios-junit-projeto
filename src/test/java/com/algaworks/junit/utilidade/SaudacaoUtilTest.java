@@ -23,11 +23,16 @@ class SaudacaoUtilTest {
 
         // [A]ctive: Executando o cenário;
         String saudacao = saudar(horaValida);
+        String saudacaoCorreta = "Bom dia";
 
         // [A]ssert: Validar se o cenário está correto;
+        //assertThat(saudacao)
+        //      .withFailMessage("Saudação incorreta!")
+        //        .isEqualTo("Bom dia");
         assertThat(saudacao)
-                .withFailMessage("Saudação incorreta!")
-                .isEqualTo("Bom dia");
+                .as("Validando se a saudação é %s", saudacaoCorreta)
+                .withFailMessage("Erro: Saudação incorreta! Resultado : %s", saudacao)
+                .isEqualTo(saudacaoCorreta);
     }
 
     @Test
