@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.algaworks.junit.utilidade.SaudacaoUtil.saudar;
+import static com.algaworks.junit.utilidade.SaudacaoUtilConditions.igualBomdia;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -23,16 +24,23 @@ class SaudacaoUtilTest {
 
         // [A]ctive: Executando o cenário;
         String saudacao = saudar(horaValida);
-        String saudacaoCorreta = "Bom dia";
+        //String saudacaoCorreta = "Bom dia";
+
+        //<String> bomDia = new Condition<>((String) -> String.equals(saudacaoCorreta),
+        //        "igual a %s",
+        //        saudacaoCorreta);
 
         // [A]ssert: Validar se o cenário está correto;
         //assertThat(saudacao)
         //      .withFailMessage("Saudação incorreta!")
         //        .isEqualTo("Bom dia");
+        //assertThat(saudacao)
+                //.as("Validando se a saudação é %s", saudacaoCorreta)
+                //.withFailMessage("Erro: Saudação incorreta! Resultado : %s", saudacao)
+                //.isEqualTo(saudacaoCorreta);
+
         assertThat(saudacao)
-                .as("Validando se a saudação é %s", saudacaoCorreta)
-                .withFailMessage("Erro: Saudação incorreta! Resultado : %s", saudacao)
-                .isEqualTo(saudacaoCorreta);
+                .is(igualBomdia());
     }
 
     @Test
