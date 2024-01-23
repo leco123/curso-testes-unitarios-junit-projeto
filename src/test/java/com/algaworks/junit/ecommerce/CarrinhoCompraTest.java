@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Carrinho de compras")
@@ -224,6 +225,16 @@ class CarrinhoCompraTest {
                 carrinhoCompra.adicionarProduto(notebook, 1);
                 carrinhoCompra.adicionarProduto(desktop, 1);
             }
+
+            @Test
+            @DisplayName("Então deve conter apenas produtos adicionados")
+            void entaoDeveConterApenasProdutosAdicionados() { 
+                assertThat(carrinhoCompra.getItens()) // Inicia uma asserção com a lista de itens do carrinho de compras
+                        .flatMap(ItemCarrinhoCompra::getProduto) // Transforma a lista de itens em uma lista de produtos
+                        .contains(notebook, desktop) // Verifica se a lista de produtos contém os produtos 'notebook' e 'desktop'
+                        .doesNotContain(tablet); // Verifica também se a lista de produtos não contém o produto 'tablet'
+            }
+
 
             @Test
             @DisplayName("Então deve somar na quantidade dos itens iguais")
